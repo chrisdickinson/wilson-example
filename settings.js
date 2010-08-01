@@ -18,7 +18,7 @@ settings.extend({
     'pieshop':{
         'values':{
             'DB_HOST':'localhost',
-            'DB_NAME':'whisper'
+            'DB_NAME':'wilson'
         },
         'addons':{
             'backend':'postpie.backends:PostgresBackend',
