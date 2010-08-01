@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+
+{% block extratitle %} | {% if entry_list|length > 0 %}Last {{ entry_list|length }} Post{{ entry_list|length|pluralize:",s" }}{% else %}No Posts Yet{% endif %}{% endblock %}
+
+{% block content %}
+    <h2>Most Recent Posts</h2>
+    <ul>
+        {% for entry in entry_list %}
+            <li>
+                <h3><a href="{{ entry.get_absolute_url }}" title="{{ entry.title|title }}">{{ entry.title|title }}</a></h3>
+                <span>Posted {{ entry.created|date:"b dl, Y" }}</span>
+                <p class="tease">{{ entry.tease }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
