@@ -6,7 +6,7 @@ var Entry = require('./models').Entry,
 
 
 exports.detail_view = function(request, response, year, month, day, slug) {
-    getObjectOr404(Entry, {'slug':slug}, function(entry) {
+    getObjectOr404(response)(Entry, {'slug':slug}, function(entry) {
         renderToResponse(request, response)('blog/entry_detail.html', {'entry':entry});
     });
 };
