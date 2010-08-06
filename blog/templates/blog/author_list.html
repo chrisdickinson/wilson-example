@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block extratitle %}All Authors{% endblock %}
+
+{% block content %}
+    <h2>All authors</h2>
+    <ul>
+        {% for author in author_list %}
+            <li>
+                <h3><a href="{{ author.get_absolute_url }}" title="{{ author.get_full_name }}">{{ author.get_full_name }}</a></h3>
+            </li>
+        {% empty %}
+            <li>There don&rsquo;t appear to be any authors.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+

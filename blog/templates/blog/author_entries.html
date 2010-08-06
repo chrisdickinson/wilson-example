@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+
+{% block extratitle %} | Posts by {{ author.get_full_name }}{% endblock %}
+
+{% block content %}
+    <h2>Posts by {{ author.get_full_name }}</h2>
+    <ul>
+        {% for entry in author.entry_set.all %}
+            <li>
+                <h3><a href="{{ entry.get_absolute_url }}" title="{{ entry.title|title }}">{{ entry.title|title }}</a></h3>
+                <span>Posted {{ entry.created|date:"b dl, Y" }}</span>
+                <p class="tease">{{ entry.tease }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+

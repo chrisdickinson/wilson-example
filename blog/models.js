@@ -3,14 +3,31 @@ var models = require('pieshop').core,
     reverse = require('wilson').urls.reverse,
     strftime = require('jsdtl').datetime.strftime;
 
-exports.Entry = models.resource({
-    'table':'entries',
-    'title':new fields.CharField({'max_length':255}),
-    'tease':new fields.CharField({'max_length':1000}),
-    'slug':new fields.CharField({'max_length':50}),
-    'body':new fields.TextField(),
-    'created':new fields.DateTimeField({'auto_now_add':true}),
+exports.Author = models.resource({
+    'username':fields.CharField({'max_length':255}),
+    'first_name':fields.CharField({'max_length':255}),
+    'last_name':fields.CharField({'max_length':255}),
+    'get_absolute_url':function() {
+        return reverse('author-entries', [
+            this.username
+        ]);
+    },
+    'get_full_name':function() {
+        return [this.first_name, this.last_name].join(' ');
+    },
+    Meta:{
+        'table':'authors',
+        'ordering':'username',
+    }
+});
 
+exports.Entry = models.resource({
+    'title':fields.CharField({'max_length':255}),
+    'tease':fields.CharField({'max_length':1000}),
+    'slug':fields.CharField({'max_length':50}),
+    'body':fields.TextField(),
+    'created':fields.DateTimeField({'auto_now_add':true}),
+    'author':fields.ForeignKey(exports.Author, {'related_name':'entry_set'}), 
     'get_absolute_url':function() {
         return reverse('blog-detail-view', [
             this.created.getFullYear(),
@@ -19,4 +36,9 @@ exports.Entry = models.resource({
             this.slug
         ]); 
     },
+    Meta:{
+        'table':'entries',
+        'ordering':'-created',
+    }
 });
+
