@@ -15,6 +15,9 @@ exports.Author = models.resource({
     'get_full_name':function() {
         return [this.first_name, this.last_name].join(' ');
     },
+    'toString':function() {
+        return '<Author: "'+this.username+'">';
+    },
     Meta:{
         'table':'authors',
         'ordering':'username',
@@ -35,6 +38,9 @@ exports.Entry = models.resource({
             this.created.getDate(),
             this.slug
         ]); 
+    },
+    'toString':function() {
+        return '<Entry: "'+this.title+'">';
     },
     Meta:{
         'table':'entries',
