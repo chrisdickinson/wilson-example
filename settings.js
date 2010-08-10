@@ -1,6 +1,8 @@
-var settings = require('wilson').conf.settings,
+var conf = require('wilson').conf,
+    settings = conf.settings,
+    primary = conf.primary,
+    app = conf.app,
     path = require('path');
-
 
 settings.extend({
     'jsdtl':{
@@ -27,12 +29,13 @@ settings.extend({
     },
     'wilson':{
         'values':{
-            'apps':[
-                'blog',
-            ],
+            'apps':{
+                'auth':primary('./auth'),
+                'myblog':app('./blog'),
+                'yrblog':app('./blog'),
+            },
             'root_urlconf':'urls.patterns',
+            'middleware':[],
         }
     },
 });
-
-
