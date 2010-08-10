@@ -10,25 +10,9 @@ To make this work,
     git clone http://github.com/chrisdickson/wilson.git && cd wilson && npm install . && cd -
     # and obtain a copy of jsdtl.
 
+    # in the wilson-example directory...
     createdb wilson
-    psql wilson
-    #enter the following 
-    BEGIN;
-    CREATE TABLE entries (
-        id SERIAL,
-        slug VARCHAR(50),
-        title VARCHAR(255),
-        tease VARCHAR(1000),
-        body TEXT,
-        created TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-    );
-    COMMIT; 
-    insert into entries (slug, title, tease, body) values ('hey-guys', 'hey guys', 'woooooo', 'it seems okay, at the least');
-    insert into entries (slug, title, tease, body) values ('oh-wow', 'lookit that', 'things are great', 'it seems okay, at the least');
-    # and hit enter.
-        
-    git clone git@github.com:chrisdickinson/wilson-example.git && cd wilson-example && wilson-runserver settings 8080
-
-Now open up the browser and look at the site!
+    wilson core:syncdb | psql wilson
+    wilson core:runserver 8080 settings
 
 
