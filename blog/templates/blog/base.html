@@ -1,15 +1,1 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>{% block title %}My Blog{% block extratitle %}{% endblock %}{% endblock %}</title>
-</head>
-    <body>
-        <h1><a href="/" title="My Blog">My Blog</a></h1>
-        <div id="wrap">
-            {% block content %}
-
-            {% endblock %}
-        </div>
-    </body>
-</html>
+{% extends "base.html" %}
