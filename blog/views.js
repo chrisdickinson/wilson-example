@@ -29,9 +29,6 @@ exports.detail_view = function(request, year, month, day, slug) {
 };
 
 exports.list_view = function(request) {
-    var sys = require('sys');
-    sys.debug(sys.inspect(request.get_user(this.externals.auth)));
-
     var Entry = this.models.Entry;
     Entry.objects.filter({}).limit(5).all(function(objects) {
         renderToResponse(request)('blog/entry_list.html', {'entry_list':objects});
