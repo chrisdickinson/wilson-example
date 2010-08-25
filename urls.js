@@ -4,16 +4,16 @@ var escaperoute = require('escaperoute'),
     wrap = wilson.urls.wrap,
     routes = escaperoute.routes,
     url = escaperoute.url,
+    http = wilson.http,
     surl = escaperoute.surl;
 
 exports.patterns = routes('',
     app('^/myblog/', 'myblog'),
     app('^/yrblog/', 'yrblog'),
-    url('^/$', wrap('myblog/views.list_view', 'myblog'), 'homepage'),
-    url('^/favicon.ico', function(req, resp) {
-        resp.writeHead(404, {'Content-Type':'text/html'});
-        resp.write("Not found.");
-        resp.end(); 
+    app('^/auth/', 'auth'),
+    url('^/$', wrap('blog/views.list_view', 'myblog'), 'homepage'),
+    url('^/favicon.ico', function(request) {
+        request.respond(new http.Http404("Could not find favicon.ico"));
     })
 )
 
