@@ -1,6 +1,8 @@
 var wilson = require('wilson'),
     application = wilson.application,
     app = application.app,
+    fs = require('fs'),
+    path = require('path'),
     primary = application.primary;
 
 exports.app = app({
@@ -10,4 +12,7 @@ exports.app = app({
         'auth':primary('auth')
     },
     'urls':require('./urls').patterns,
+    'template_directories':[
+        path.join(path.dirname(fs.realpathSync(__filename)), 'templates')
+    ],
 });
