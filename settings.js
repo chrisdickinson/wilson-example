@@ -1,4 +1,5 @@
-var conf = require('wilson').conf,
+var wilson = require('wilson'),
+    conf = wilson.conf,
     settings = conf.settings,
     primary = conf.primary,
     app = conf.app,
@@ -12,7 +13,6 @@ settings.extend({
         },
         'values':{
             'TEMPLATE_DIRS':[
-                path.join(process.cwd(), 'blog/templates'),
                 path.join(process.cwd(), 'templates')
             ],
         },
@@ -30,12 +30,32 @@ settings.extend({
     'wilson':{
         'values':{
             'apps':{
-                'auth':primary('./auth'),
+                'core':primary('wilson.core'),
+                'sessions':primary('wilson.contrib.sessions'),
+                'auth':primary('wilson.contrib.auth'),
                 'myblog':app('./blog'),
                 'yrblog':app('./blog'),
             },
             'root_urlconf':'urls.patterns',
-            'middleware':[],
+            'use_app_template_directories':true,
+            'middleware':[
+                'core:BaseMiddleware'
+            ,   'core:DebugMiddleware'
+            ,   'core:ProcessUrlEncodedMiddleware'
+            ,   'sessions:SessionMiddleware'
+            ,   'auth:AuthenticationMiddleware'
+            ],
+        }
+    },
+}, {
+    'auth':{
+        'settings':{
+            'backends':[wilson.contrib.auth.backends.model.AuthModelBackend]
+        }
+    },
+    'core':{
+        'settings':{
+            'debug':true,
         }
     },
 });
