@@ -29,9 +29,10 @@ exports.detail_view = function(request, year, month, day, slug) {
 };
 
 exports.list_view = function(request) {
-    var Entry = this.models.Entry;
+    var Entry = this.models.Entry,
+        user = request.get_user(this.externals.auth);
     Entry.objects.filter({}).limit(5).all(function(objects) {
-        renderToResponse(request)('blog/entry_list.html', {'entry_list':objects});
+        renderToResponse(request)('blog/entry_list.html', {'entry_list':objects, 'user':user});
     });    
 };
 

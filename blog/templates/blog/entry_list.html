@@ -3,6 +3,7 @@
 {% block extratitle %} | {% if entry_list|length > 0 %}Last {{ entry_list|length }} Post{{ entry_list|length|pluralize:",s" }}{% else %}No Posts Yet{% endif %}{% endblock %}
 
 {% block content %}
+    {% if user.isAuthenticated %}Hi {{ user.getFullName|title }}{% endif %}
     <h2>Most Recent Posts</h2>
     <ul>
         {% for entry in entry_list %}
