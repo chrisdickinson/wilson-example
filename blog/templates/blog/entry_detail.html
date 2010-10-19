@@ -1,10 +1,10 @@
 {% extends "blog/base.html" %}
 
-{% block extratitle %} | {{ entry.title|title }}{% endblock %}
+{% block extratitle %} | {{ entry.title }}{% endblock %}
 
 {% block content %}
-    <h2>{{ entry.title|title }}</h2>
-    <p><span>Posted {{ entry.created|date:"b dl, Y" }}</span></p>
+    <h2>{{ entry.title }}</h2>
+    <p><span>Posted {{ entry.created }}</span></p>
     <p class="tease">{{ entry.tease }}</p>
     <div class="entry-content">
         {{ entry.body }}

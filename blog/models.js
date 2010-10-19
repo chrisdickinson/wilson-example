@@ -1,7 +1,25 @@
-var wilson = require('wilson'),
-    models = wilson.models,
-    reverse = wilson.urls.reverse,
-    strftime = require('jsdtl').datetime.strftime;
+// define your models here!
+
+var models = require('wilson/models'),
+    reverse = require('wilson/urls').reverse;
+
+var getMonth = function(time) {
+    return [ 
+        '',
+        'jan',
+        'feb',
+        'mar',
+        'apr',
+        'may',
+        'jun',
+        'jul',
+        'aug',
+        'sep',
+        'oct',
+        'nov',
+        'dec'
+    ][time.getMonth()];
+};
 
 exports.Entry = models.model({
     'title':models.CharField({'max_length':255}),
@@ -13,7 +31,7 @@ exports.Entry = models.model({
     'get_absolute_url':function() {
         return reverse([this._meta.app_name, 'blog-detail-view'].join(':'), [
             this.created.getFullYear(),
-            strftime(this.created, "b"),
+            getMonth(this.created),
             this.created.getDate(),
             this.slug
         ]); 

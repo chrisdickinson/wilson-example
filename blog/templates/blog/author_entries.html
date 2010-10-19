@@ -8,7 +8,7 @@
         {% for entry in author.entry_set.all %}
             <li>
                 <h3><a href="{{ entry.get_absolute_url }}" title="{{ entry.title|title }}">{{ entry.title|title }}</a></h3>
-                <span>Posted {{ entry.created|date:"b dl, Y" }}</span>
+                <span>Posted {{ entry.created }}</span>
                 <p class="tease">{{ entry.tease }}</p>
             </li>
         {% endfor %}
