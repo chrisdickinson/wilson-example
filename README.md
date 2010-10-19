@@ -4,6 +4,7 @@ Wilson Example
 This is a simple example of a project set up to use wilson.
 To make this work,
 
+    npm install escaperoute
     npm install postgres
     npm install postpie
     npm install pieshop
